@@ -1,7 +1,17 @@
+import { useState } from 'react'
 import Header from './components/Header'
+import PalceForm from './components/PalceForm'
+import { PlaceResponse } from './types/backend'
 
 function App() {
-  return <Header />
+  const [restaurants, setRestaurants] = useState<PlaceResponse[]>([])
+
+  return (
+    <>
+      <Header />
+      <PalceForm setRestaurants={setRestaurants} />
+    </>
+  )
 }
 
 export default App

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { PlaceResponse } from '../types/backend'
+import { PlaceResponse } from '../types/place'
 
 type PlaceFormProps = {
-  setRestaurants: React.Dispatch<React.SetStateAction<PlaceResponse[]>>
+  setPlaces: React.Dispatch<React.SetStateAction<PlaceResponse>>
 }
 
-function PalceForm({ setRestaurants }: PlaceFormProps) {
+function PalceForm({ setPlaces }: PlaceFormProps) {
   const [destination, setDestination] = useState('')
 
   const handleDestinationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,11 +16,13 @@ function PalceForm({ setRestaurants }: PlaceFormProps) {
     e.preventDefault()
 
     const apiRes = await fetch(
-      `${import.meta.env.VITE_BASE_URL}/place?type=restaurant&destination=${destination}`
+      `${
+        import.meta.env.VITE_BASE_URL
+      }/place?types[]=restaurant&destination=${destination}`
     )
     const data = await apiRes.json()
 
-    setRestaurants(data)
+    setPlaces(data)
   }
 
   return (

@@ -1,11 +1,11 @@
-import { PlaceResponse } from '../types/backend'
+import { PlaceData } from '../types/place'
 
 type PlaceCardProps = {
-  place: PlaceResponse
+  place: PlaceData
 }
 
 function PlaceCard({ place }: PlaceCardProps) {
-  const getRatingString = (place: PlaceResponse) => {
+  const getRatingString = (place: PlaceData) => {
     if (place.numRatings === 0) {
       return 'No ratings'
     }

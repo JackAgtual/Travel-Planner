@@ -1,9 +1,9 @@
 import PlaceCard from './PlaceCard'
-import { PlaceResponse } from '../types/backend'
+import { PlaceData } from '../types/place'
 
 type PlaceGridProps = {
   placeType: string
-  places: PlaceResponse[]
+  places: PlaceData[]
 }
 
 function PlacesGrid({ placeType, places }: PlaceGridProps) {

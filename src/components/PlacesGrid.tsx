@@ -11,8 +11,8 @@ function PlacesGrid({ placeType, places }: PlaceGridProps) {
     <>
       <h1 className="text-center text-xl font-semibold">{placeType}</h1>
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4: 2xl:grid-cols-5">
-        {places.map((place) => {
-          return <PlaceCard key={place.name} place={place} />
+        {places.map((place, idx) => {
+          return <PlaceCard key={idx} place={place} />
         })}
       </div>
     </>

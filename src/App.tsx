@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Header from './components/Header'
 import PalceForm from './components/PalceForm'
-import { PlaceResponse } from './types/place'
+import { PlaceResponse, queryParamToDisplayType } from './types/place'
 import PlacesGrid from './components/PlacesGrid'
 
 function App() {
@@ -11,9 +11,11 @@ function App() {
     <>
       <Header />
       <PalceForm setPlaces={setPlaces} />
-      {places.length > 0 && (
-        <PlacesGrid placeType="Restaurants" places={places[0].data} />
-      )}
+      {places.map((place) => {
+        const name =
+          queryParamToDisplayType[place.type as keyof typeof queryParamToDisplayType]
+        return <PlacesGrid key={place.type} placeType={name} places={place.data} />
+      })}
     </>
   )
 }

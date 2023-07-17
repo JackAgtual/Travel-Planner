@@ -42,11 +42,11 @@ function PalceForm({ setPlaces }: PlaceFormProps) {
   }
 
   return (
-    <div className="flex flex-col items-center">
-      <h1 className="text-lg font-bold">Where would you like to go?</h1>
+    <div className="m-2 flex flex-col items-center rounded-md border-2 px-2 py-4">
+      <h1 className="text-xl font-bold">Where would you like to go?</h1>
       <form
         onSubmit={(e) => handleDestinationFormSubmit(e)}
-        className="flex flex-col justify-center"
+        className="mx-3 mt-4 flex flex-col items-center space-y-3"
       >
         <label>
           Destination:
@@ -59,7 +59,7 @@ function PalceForm({ setPlaces }: PlaceFormProps) {
             onChange={(e) => handleDestinationChange(e)}
           ></input>
         </label>
-        <fieldset className="flex flex-wrap justify-center gap-3 border p-2">
+        <fieldset className="flex flex-wrap justify-center gap-3 rounded-md border p-2">
           <legend>Choose what types of places you'd like to see:</legend>
           {Object.entries(queryParamToDisplayType).map((entry) => {
             const [queryParam, displayName] = entry
@@ -76,7 +76,7 @@ function PalceForm({ setPlaces }: PlaceFormProps) {
             )
           })}
         </fieldset>
-        <button type="submit" className="rounded-md border-2">
+        <button type="submit" className="rounded-md bg-slate-200 px-10 py-2">
           Search
         </button>
       </form>

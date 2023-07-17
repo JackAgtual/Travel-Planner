@@ -10,12 +10,16 @@ function App() {
   return (
     <>
       <Header />
-      <PalceForm setPlaces={setPlaces} />
-      {places.map((place) => {
-        const name =
-          queryParamToDisplayType[place.type as keyof typeof queryParamToDisplayType]
-        return <PlacesGrid key={place.type} placeType={name} places={place.data} />
-      })}
+      <div className="mx-auto	 max-w-screen-2xl">
+        <PalceForm setPlaces={setPlaces} />
+        <div className="mx-4 space-y-10">
+          {places.map((place) => {
+            const name =
+              queryParamToDisplayType[place.type as keyof typeof queryParamToDisplayType]
+            return <PlacesGrid key={place.type} placeType={name} places={place.data} />
+          })}
+        </div>
+      </div>
     </>
   )
 }

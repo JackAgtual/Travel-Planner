@@ -1,6 +1,6 @@
 function Header() {
   return (
-    <header className="text-center text-3xl py-5 text-slate-50 bg-slate-500">
+    <header className="bg-slate-500 py-5 text-center text-3xl text-slate-50">
       Travel Planner
     </header>
   )

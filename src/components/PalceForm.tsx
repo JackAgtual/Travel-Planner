@@ -51,7 +51,7 @@ function PalceForm({ setPlaces }: PlaceFormProps) {
         <label>
           Destination:
           <input
-            className=" px-2 ml-1 border-2 border-solid rounded-md"
+            className=" ml-1 rounded-md border-2 border-solid px-2"
             type="text"
             placeholder="San Francisco"
             value={destination}
@@ -59,7 +59,7 @@ function PalceForm({ setPlaces }: PlaceFormProps) {
             onChange={(e) => handleDestinationChange(e)}
           ></input>
         </label>
-        <fieldset className="border p-2 flex justify-center flex-wrap gap-3">
+        <fieldset className="flex flex-wrap justify-center gap-3 border p-2">
           <legend>Choose what types of places you'd like to see:</legend>
           {Object.entries(queryParamToDisplayType).map((entry) => {
             const [queryParam, displayName] = entry
@@ -76,7 +76,7 @@ function PalceForm({ setPlaces }: PlaceFormProps) {
             )
           })}
         </fieldset>
-        <button type="submit" className="border-2 rounded-md">
+        <button type="submit" className="rounded-md border-2">
           Search
         </button>
       </form>

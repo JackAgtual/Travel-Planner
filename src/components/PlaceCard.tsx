@@ -16,7 +16,7 @@ function PlaceCard({ place }: PlaceCardProps) {
   }
 
   return (
-    <div className="flex flex-col justify-center border-2 rounded-md m-2 text-lg max-w-sm">
+    <div className="flex flex-col justify-center border-2 rounded-md mx-auto text-lg max-w-sm: xl:max-w-2xl">
       <img
         src={place.photoUrl}
         className="aspect-video object-none w-full rounded-md mx-auto"

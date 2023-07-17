@@ -3,6 +3,7 @@ export type PlaceData = {
   photoUrl: string
   rating: number
   numRatings: number
+  priceLevel: number
 }
 
 export type PlaceResponse = {

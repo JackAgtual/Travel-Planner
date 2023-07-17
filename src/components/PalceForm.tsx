@@ -20,9 +20,8 @@ function PalceForm({ setPlaces }: PlaceFormProps) {
         import.meta.env.VITE_BASE_URL
       }/place?types[]=restaurant&destination=${destination}`
     )
-    const data = await apiRes.json()
-
-    setPlaces(data)
+    const apiResData: PlaceResponse = await apiRes.json()
+    setPlaces(apiResData)
   }
 
   return (

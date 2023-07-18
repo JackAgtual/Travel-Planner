@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Header from './components/Header'
 import Map from './components/Map'
-import PalceForm from './components/PalceForm'
+import PalceForm from './components/PlaceForm'
 import { Coordinates, PlaceResponse, queryParamToDisplayType } from './types/place'
 import PlacesGrid from './components/PlacesGrid'
 

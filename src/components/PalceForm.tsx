@@ -1,15 +1,13 @@
 import React, { useState } from 'react'
-import {
-  Coordinates,
-  GeopointResponse,
-  PlaceResponse,
-  queryParamToDisplayType,
-} from '../types/place'
+import { Coordinates, PlaceResponse, queryParamToDisplayType } from '../types/place'
+import PlaceServices from '../services/placeServices'
 
 type PlaceFormProps = {
   setPlaces: React.Dispatch<React.SetStateAction<PlaceResponse>>
   setMapCoordinates: React.Dispatch<React.SetStateAction<Coordinates>>
 }
+
+const placeServices = PlaceServices()
 
 function PalceForm({ setPlaces, setMapCoordinates }: PlaceFormProps) {
   const [destination, setDestination] = useState('')
@@ -35,21 +33,10 @@ function PalceForm({ setPlaces, setMapCoordinates }: PlaceFormProps) {
   const handleDestinationFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    let typesQueryParam = ''
-    selectedTypes.forEach((type) => (typesQueryParam += `&types[]=${type}`))
+    const placeData = await placeServices.fetchPlaceData(selectedTypes, destination)
+    setPlaces(placeData)
 
-    const apiRes = await fetch(
-      `${
-        import.meta.env.VITE_BASE_URL
-      }/place?${typesQueryParam}&destination=${destination}`
-    )
-    const apiResData: PlaceResponse = await apiRes.json()
-    setPlaces(apiResData)
-
-    const geopoint = await fetch(
-      `${import.meta.env.VITE_BASE_URL}/place/geopoint?destination=${destination}`
-    )
-    const geopointData: GeopointResponse = await geopoint.json()
+    const geopointData = await placeServices.fetchGeopointData(destination)
     setMapCoordinates({ lat: geopointData.lat, lon: geopointData.lon })
   }
 

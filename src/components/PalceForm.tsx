@@ -1,11 +1,17 @@
 import React, { useState } from 'react'
-import { PlaceResponse, queryParamToDisplayType } from '../types/place'
+import {
+  Coordinates,
+  GeopointResponse,
+  PlaceResponse,
+  queryParamToDisplayType,
+} from '../types/place'
 
 type PlaceFormProps = {
   setPlaces: React.Dispatch<React.SetStateAction<PlaceResponse>>
+  setMapCoordinates: React.Dispatch<React.SetStateAction<Coordinates>>
 }
 
-function PalceForm({ setPlaces }: PlaceFormProps) {
+function PalceForm({ setPlaces, setMapCoordinates }: PlaceFormProps) {
   const [destination, setDestination] = useState('')
   const [selectedTypes, setSelectedTypes] = useState<Set<string>>(new Set([]))
 
@@ -39,6 +45,12 @@ function PalceForm({ setPlaces }: PlaceFormProps) {
     )
     const apiResData: PlaceResponse = await apiRes.json()
     setPlaces(apiResData)
+
+    const geopoint = await fetch(
+      `${import.meta.env.VITE_BASE_URL}/place/geopoint?destination=${destination}`
+    )
+    const geopointData: GeopointResponse = await geopoint.json()
+    setMapCoordinates({ lat: geopointData.lat, lon: geopointData.lon })
   }
 
   return (

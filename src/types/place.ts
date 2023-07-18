@@ -24,3 +24,15 @@ export const queryParamToDisplayType = {
   night_club: 'Night Clubs',
   tourist_attraction: 'Trourrist Attractions',
 }
+
+export type GeopointResponse = {
+  address: string
+  locationName: string
+  lat: number
+  lon: number
+}
+
+export type Coordinates = {
+  lat: number
+  lon: number
+}

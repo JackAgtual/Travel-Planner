@@ -4,6 +4,7 @@ import Map from './components/Map'
 import PalceForm from './components/PlaceForm'
 import { Coordinates, PlaceResponse, queryParamToDisplayType } from './types/place'
 import PlacesGrid from './components/PlacesGrid'
+import Weather from './components/Weather'
 
 function App() {
   const [places, setPlaces] = useState<PlaceResponse>([])
@@ -22,6 +23,7 @@ function App() {
             return <PlacesGrid key={place.type} placeType={name} places={place.data} />
           })}
         </div>
+        <Weather />
       </div>
     </>
   )

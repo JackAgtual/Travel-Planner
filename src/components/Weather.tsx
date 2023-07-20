@@ -1,45 +1,23 @@
+import { useEffect, useState } from 'react'
 import WeatherCard from './WeatherCard'
 import { ForecastResponse } from '../types/weather'
+import { Coordinates } from '../types/place'
+import WeatherServices from '../services/weatherServices'
 
-const weatherData: ForecastResponse = [
-  {
-    minTemp: 69.12,
-    maxTemp: 76.82,
-    displayDate: '2023-07-19',
-    icon: 'https://openweathermap.org/img/wn/01d@2x.png',
-    description: 'Clear',
-  },
-  {
-    minTemp: 71.01,
-    maxTemp: 78.19,
-    displayDate: '2023-07-20',
-    icon: 'https://openweathermap.org/img/wn/01d@2x.png',
-    description: 'Clear',
-  },
-  {
-    minTemp: 70.18,
-    maxTemp: 78.01,
-    displayDate: '2023-07-21',
-    icon: 'https://openweathermap.org/img/wn/04d@2x.png',
-    description: 'Clouds',
-  },
-  {
-    minTemp: 70.27,
-    maxTemp: 77.32,
-    displayDate: '2023-07-22',
-    icon: 'https://openweathermap.org/img/wn/04d@2x.png',
-    description: 'Clouds',
-  },
-  {
-    minTemp: 71.64,
-    maxTemp: 77.22,
-    displayDate: '2023-07-23',
-    icon: 'https://openweathermap.org/img/wn/01d@2x.png',
-    description: 'Clear',
-  },
-]
+type WeatherProps = {
+  coordinates: Coordinates
+}
 
-function Weather() {
+const weatherServices = WeatherServices()
+
+function Weather({ coordinates }: WeatherProps) {
+  const [weatherData, setWeatherData] = useState<ForecastResponse>([])
+
+  useEffect(() => {
+    weatherServices.fetchForecastData(coordinates).then((data) => {
+      setWeatherData(data)
+    })
+  }, [coordinates.lat, coordinates.lon])
   return (
     <>
       <h1 className="mb-4 text-center text-3xl">Weather</h1>

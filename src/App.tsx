@@ -23,7 +23,7 @@ function App() {
             return <PlacesGrid key={place.type} placeType={name} places={place.data} />
           })}
         </div>
-        <Weather />
+        <Weather coordinates={mapCoordinates} />
       </div>
     </>
   )

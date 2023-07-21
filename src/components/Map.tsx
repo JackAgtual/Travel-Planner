@@ -6,11 +6,12 @@ type MapProps = {
 }
 
 function Map({ coordinates }: MapProps) {
+  if (coordinates === undefined) return
+
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
   })
   if (!isLoaded) return <p>Loading...</p>
-
   return (
     <>
       <GoogleMap

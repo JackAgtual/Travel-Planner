@@ -32,7 +32,9 @@ export type GeopointResponse = {
   lon: number
 }
 
-export type Coordinates = {
-  lat: number
-  lon: number
-}
+export type Coordinates =
+  | {
+      lat: number
+      lon: number
+    }
+  | undefined

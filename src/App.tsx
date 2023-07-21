@@ -8,14 +8,14 @@ import Weather from './components/Weather'
 
 function App() {
   const [places, setPlaces] = useState<PlaceResponse>([])
-  const [mapCoordinates, setMapCoordinates] = useState<Coordinates>({ lat: 30, lon: 30 })
+  const [mapCoordinates, setMapCoordinates] = useState<Coordinates>(undefined)
 
   return (
     <>
       <Header />
       <div className="mx-auto max-w-screen-2xl px-4">
         <PalceForm setPlaces={setPlaces} setMapCoordinates={setMapCoordinates} />
-        {places.length > 0 && <Map coordinates={mapCoordinates} />}
+        <Map coordinates={mapCoordinates} />
         <div className="space-y-10">
           {places.map((place) => {
             const name =

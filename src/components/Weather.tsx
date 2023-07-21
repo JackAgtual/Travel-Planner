@@ -11,6 +11,8 @@ type WeatherProps = {
 const weatherServices = WeatherServices()
 
 function Weather({ coordinates }: WeatherProps) {
+  if (coordinates === undefined) return
+
   const [weatherData, setWeatherData] = useState<ForecastResponse>([])
 
   useEffect(() => {

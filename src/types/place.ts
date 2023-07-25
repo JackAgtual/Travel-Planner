@@ -12,7 +12,7 @@ export type PlaceResponse = {
 }[]
 
 export const queryParamToDisplayType = {
-  restaurant: 'Resturants',
+  restaurant: 'Restaurants',
   bar: 'Bars',
   airport: 'Airports',
   art_gallery: 'Art Galleries',
@@ -22,7 +22,7 @@ export const queryParamToDisplayType = {
   lodging: 'Lodging',
   museum: 'Museums',
   night_club: 'Night Clubs',
-  tourist_attraction: 'Trourrist Attractions',
+  tourist_attraction: 'Tourist Attractions',
 }
 
 export type GeopointResponse = {

@@ -19,13 +19,19 @@ function Weather({ coordinates }: WeatherProps) {
 
   return (
     <>
-      <h1 className="mb-4 text-center text-3xl">Weather</h1>
-      <div className="space-y-4 md:flex md:justify-around md:space-x-4 md:space-y-0">
-        {weatherData !== undefined &&
-          weatherData.map((weather) => {
-            return <WeatherCard key={weather.displayDate} weather={weather} />
-          })}
-      </div>
+      {weatherLoading ? (
+        <p className="text-center text-xl">Loading weather...</p>
+      ) : (
+        <>
+          <h1 className="mb-4 text-center text-3xl">Weather</h1>
+          <div className="space-y-4 md:flex md:justify-around md:space-x-4 md:space-y-0">
+            {weatherData !== undefined &&
+              weatherData.map((weather) => {
+                return <WeatherCard key={weather.displayDate} weather={weather} />
+              })}
+          </div>
+        </>
+      )}
     </>
   )
 }

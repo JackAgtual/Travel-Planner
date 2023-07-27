@@ -25,6 +25,8 @@ function App() {
   )
   const [, geopointLoading, geopointError, fetchGeopoint] = useGeoPoint(destination)
 
+  const loadingData = placesLoading || geopointLoading
+
   return (
     <>
       <Header />
@@ -38,15 +40,30 @@ function App() {
           fetchPlaces={fetchPlaces}
           fetchGeopoint={fetchGeopoint}
         />
-        <Map coordinates={mapCoordinates} />
-        <div className="space-y-10">
-          {places.map((place) => {
-            const name =
-              queryParamToDisplayType[place.type as keyof typeof queryParamToDisplayType]
-            return <PlacesGrid key={place.type} placeType={name} places={place.data} />
-          })}
-        </div>
-        <Weather coordinates={mapCoordinates} />
+
+        {loadingData ? (
+          <p className="text-center text-xl">Loading map...</p>
+        ) : (
+          <Map coordinates={mapCoordinates} />
+        )}
+        {loadingData ? (
+          <p className="text-center text-xl">Loading places...</p>
+        ) : (
+          <div className="space-y-10">
+            {places.map((place) => {
+              const name =
+                queryParamToDisplayType[
+                  place.type as keyof typeof queryParamToDisplayType
+                ]
+              return <PlacesGrid key={place.type} placeType={name} places={place.data} />
+            })}
+          </div>
+        )}
+        {loadingData ? (
+          <p className="text-center text-xl">Loading weather...</p>
+        ) : (
+          <Weather coordinates={mapCoordinates} />
+        )}
       </div>
     </>
   )

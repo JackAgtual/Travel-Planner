@@ -11,6 +11,10 @@ export type PlaceResponse = {
   data: PlaceData[]
 }[]
 
+export type SelectedPlaces = Set<string>
+
+export type Destination = string
+
 export const queryParamToDisplayType = {
   restaurant: 'Restaurants',
   bar: 'Bars',

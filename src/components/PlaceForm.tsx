@@ -1,18 +1,31 @@
-import React, { useState } from 'react'
-import { Coordinates, PlaceResponse, queryParamToDisplayType } from '../types/place'
-import PlaceServices from '../services/placeServices'
+import {
+  Coordinates,
+  PlaceResponse,
+  GeopointResponse,
+  queryParamToDisplayType,
+  SelectedPlaces,
+  Destination,
+} from '../types/place'
 
 type PlaceFormProps = {
+  destination: Destination
+  setDestination: React.Dispatch<React.SetStateAction<string>>
+  setSelectedTypes: React.Dispatch<React.SetStateAction<SelectedPlaces>>
   setPlaces: React.Dispatch<React.SetStateAction<PlaceResponse>>
   setMapCoordinates: React.Dispatch<React.SetStateAction<Coordinates>>
+  fetchPlaces: () => Promise<void | PlaceResponse> | undefined
+  fetchGeopoint: () => Promise<void | GeopointResponse> | undefined
 }
 
-const placeServices = PlaceServices()
-
-function PalceForm({ setPlaces, setMapCoordinates }: PlaceFormProps) {
-  const [destination, setDestination] = useState('')
-  const [selectedTypes, setSelectedTypes] = useState<Set<string>>(new Set([]))
-
+function PalceForm({
+  destination,
+  setDestination,
+  setSelectedTypes,
+  setPlaces,
+  setMapCoordinates,
+  fetchPlaces,
+  fetchGeopoint,
+}: PlaceFormProps) {
   const handleDestinationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDestination(e.target.value)
   }
@@ -32,12 +45,16 @@ function PalceForm({ setPlaces, setMapCoordinates }: PlaceFormProps) {
 
   const handleDestinationFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const placeData = await fetchPlaces()
+    if (placeData) {
+      setPlaces(placeData)
+    }
 
-    const placeData = await placeServices.fetchPlaceData(selectedTypes, destination)
-    setPlaces(placeData)
-
-    const geopointData = await placeServices.fetchGeopointData(destination)
-    setMapCoordinates({ lat: geopointData.lat, lon: geopointData.lon })
+    const geopointData = await fetchGeopoint()
+    console.log(geopointData)
+    if (geopointData) {
+      setMapCoordinates({ lat: geopointData.lat, lon: geopointData.lon })
+    }
   }
 
   return (

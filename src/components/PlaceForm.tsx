@@ -51,7 +51,6 @@ function PalceForm({
     }
 
     const geopointData = await fetchGeopoint()
-    console.log(geopointData)
     if (geopointData) {
       setMapCoordinates({ lat: geopointData.lat, lon: geopointData.lon })
     }

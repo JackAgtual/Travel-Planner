@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { PlaceData, SelectedPlaces } from '../types/place'
 
 type PlaceCardProps = {
@@ -6,6 +7,8 @@ type PlaceCardProps = {
 }
 
 function PlaceCard({ place, setSelectedPlaces }: PlaceCardProps) {
+  const [addedToMap, setAddedToMap] = useState(false)
+
   const getRatingString = (place: PlaceData) => {
     if (place.numRatings === 0) {
       return 'No ratings'
@@ -17,10 +20,18 @@ function PlaceCard({ place, setSelectedPlaces }: PlaceCardProps) {
   }
 
   const handleAddToMapClick = () => {
+    setAddedToMap(true)
     setSelectedPlaces((prevPlaces) => {
       const updatedSelectedPlaces = new Set(prevPlaces)
       updatedSelectedPlaces.add(place)
       return updatedSelectedPlaces
+    })
+  }
+
+  const handleRemoveFromMapClick = () => {
+    setAddedToMap(false)
+    setSelectedPlaces((prevPlaces) => {
+      return new Set([...prevPlaces].filter((aPlace) => aPlace.name !== place.name))
     })
   }
 
@@ -32,12 +43,21 @@ function PlaceCard({ place, setSelectedPlaces }: PlaceCardProps) {
       />
       <h1 className="mx-auto max-w-xs truncate px-4 text-center text-xl">{place.name}</h1>
       <p className="text-center">{getRatingString(place)}</p>
-      <button
-        className="mx-auto my-2 w-fit rounded-md bg-slate-200 px-6 py-1"
-        onClick={handleAddToMapClick}
-      >
-        Add to map
-      </button>
+      {addedToMap ? (
+        <button
+          className="mx-auto my-2 w-fit rounded-md bg-red-200 px-6 py-1"
+          onClick={handleRemoveFromMapClick}
+        >
+          Remove from map
+        </button>
+      ) : (
+        <button
+          className="mx-auto my-2 w-fit rounded-md bg-slate-200 px-6 py-1"
+          onClick={handleAddToMapClick}
+        >
+          Add to map
+        </button>
+      )}
     </div>
   )
 }

@@ -3,14 +3,14 @@ import {
   PlaceResponse,
   GeopointResponse,
   queryParamToDisplayType,
-  SelectedPlaces,
+  SelectedPlaceTypes,
   Destination,
 } from '../types/place'
 
 type PlaceFormProps = {
   destination: Destination
   setDestination: React.Dispatch<React.SetStateAction<string>>
-  setSelectedTypes: React.Dispatch<React.SetStateAction<SelectedPlaces>>
+  setSelectedTypes: React.Dispatch<React.SetStateAction<SelectedPlaceTypes>>
   setPlaces: React.Dispatch<React.SetStateAction<PlaceResponse>>
   setMapCoordinates: React.Dispatch<React.SetStateAction<Coordinates>>
   fetchPlaces: () => Promise<void | PlaceResponse> | undefined

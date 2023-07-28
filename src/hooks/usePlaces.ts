@@ -1,8 +1,11 @@
 import useFetch from './useFetch'
-import { PlaceResponse } from '../types/place'
+import { PlaceResponse, SelectedPlaceTypes } from '../types/place'
 const BASE_URL = import.meta.env.VITE_BASE_URL
 
-export default function usePlaces(typesOfPlaces: Set<string>, destination: string) {
+export default function usePlaces(
+  typesOfPlaces: SelectedPlaceTypes,
+  destination: string,
+) {
   const search = new URLSearchParams()
   typesOfPlaces.forEach((type) => {
     search.append('types[]', type)

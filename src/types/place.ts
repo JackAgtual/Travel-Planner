@@ -4,6 +4,10 @@ export type PlaceData = {
   rating: number
   numRatings: number
   priceLevel: number
+  location: {
+    lat: number
+    lon: number
+  }
 }
 
 export type PlaceResponse = {
@@ -11,7 +15,9 @@ export type PlaceResponse = {
   data: PlaceData[]
 }[]
 
-export type SelectedPlaces = Set<string>
+export type SelectedPlaceTypes = Set<string>
+
+export type SelectedPlaces = Set<PlaceData>
 
 export type Destination = string
 

@@ -6,8 +6,9 @@ import {
   Coordinates,
   PlaceResponse,
   queryParamToDisplayType,
-  SelectedPlaces,
+  SelectedPlaceTypes,
   Destination,
+  SelectedPlaces,
 } from './types/place'
 import PlacesGrid from './components/PlacesGrid'
 import Weather from './components/Weather'
@@ -18,12 +19,13 @@ function App() {
   const [places, setPlaces] = useState<PlaceResponse>([])
   const [mapCoordinates, setMapCoordinates] = useState<Coordinates>(undefined)
   const [destination, setDestination] = useState<Destination>('')
-  const [selectedTypes, setSelectedTypes] = useState<SelectedPlaces>(new Set([]))
+  const [selectedTypes, setSelectedTypes] = useState<SelectedPlaceTypes>(new Set([]))
   const [, placesLoading, placesError, fetchPlaces] = usePlaces(
     selectedTypes,
     destination,
   )
   const [, geopointLoading, geopointError, fetchGeopoint] = useGeoPoint(destination)
+  const [selectedPlaces, setSelectedPlaces] = useState<SelectedPlaces>(new Set())
 
   const loadingData = placesLoading || geopointLoading
 
@@ -44,7 +46,7 @@ function App() {
         {loadingData ? (
           <p className="text-center text-xl">Loading map...</p>
         ) : (
-          <Map coordinates={mapCoordinates} />
+          <Map coordinates={mapCoordinates} selectedPlaces={selectedPlaces} />
         )}
         {loadingData ? (
           <p className="text-center text-xl">Loading places...</p>
@@ -55,7 +57,14 @@ function App() {
                 queryParamToDisplayType[
                   place.type as keyof typeof queryParamToDisplayType
                 ]
-              return <PlacesGrid key={place.type} placeType={name} places={place.data} />
+              return (
+                <PlacesGrid
+                  key={place.type}
+                  placeType={name}
+                  places={place.data}
+                  setSelectedPlaces={setSelectedPlaces}
+                />
+              )
             })}
           </div>
         )}

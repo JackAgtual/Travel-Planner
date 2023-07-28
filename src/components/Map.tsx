@@ -14,14 +14,16 @@ function Map({ coordinates, selectedPlaces }: MapProps) {
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
   })
 
-  const mapCenter = useMemo(() => coordinates, [coordinates.lat, coordinates.lon])
+  const mapCenter = useMemo(() => {
+    return { lat: coordinates.lat, lng: coordinates.lon }
+  }, [coordinates.lat, coordinates.lon])
 
   if (!isLoaded) return <p>Loading...</p>
   return (
     <>
       <GoogleMap
         zoom={10}
-        center={{ lat: mapCenter.lat, lng: mapCenter.lon }}
+        center={mapCenter}
         mapContainerStyle={{ width: '100%', height: '500px' }}
       >
         {[...selectedPlaces].map((place) => (

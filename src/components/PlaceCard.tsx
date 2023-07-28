@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { PlaceData, SelectedPlaces } from '../types/place'
+import { PiHeartDuotone } from 'react-icons/pi'
 
 type PlaceCardProps = {
   place: PlaceData
@@ -37,27 +38,29 @@ function PlaceCard({ place, setSelectedPlaces }: PlaceCardProps) {
 
   return (
     <div className="mx-auto box-border flex max-w-sm flex-col justify-center rounded-md border-2 text-lg">
-      <img
-        src={place.photoUrl}
-        className="mx-auto aspect-video w-full rounded-md object-none"
-      />
+      <div className="relative">
+        <img
+          src={place.photoUrl}
+          className="mx-auto aspect-video w-full rounded-md object-none"
+        />
+        {addedToMap ? (
+          <button
+            className="absolute right-3 top-3 rounded-full bg-slate-50"
+            onClick={handleRemoveFromMapClick}
+          >
+            <PiHeartDuotone className="h-12 w-12 p-1 text-red-500 hover:text-black" />
+          </button>
+        ) : (
+          <button
+            className="absolute right-3 top-3 rounded-full bg-slate-50"
+            onClick={handleAddToMapClick}
+          >
+            <PiHeartDuotone className="h-12 w-12 rounded-full  p-1 text-black opacity-60 hover:text-red-500 hover:opacity-100" />
+          </button>
+        )}
+      </div>
       <h1 className="mx-auto max-w-xs truncate px-4 text-center text-xl">{place.name}</h1>
       <p className="text-center">{getRatingString(place)}</p>
-      {addedToMap ? (
-        <button
-          className="mx-auto my-2 w-fit rounded-md bg-red-200 px-6 py-1"
-          onClick={handleRemoveFromMapClick}
-        >
-          Remove from map
-        </button>
-      ) : (
-        <button
-          className="mx-auto my-2 w-fit rounded-md bg-slate-200 px-6 py-1"
-          onClick={handleAddToMapClick}
-        >
-          Add to map
-        </button>
-      )}
     </div>
   )
 }

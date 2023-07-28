@@ -16,12 +16,12 @@ function PlaceCard({ place }: PlaceCardProps) {
   }
 
   return (
-    <div className="mx-auto flex max-w-sm flex-col justify-center rounded-md border-2 text-lg xl:max-w-2xl">
+    <div className="mx-auto box-border flex max-w-sm flex-col justify-center rounded-md border-2 text-lg">
       <img
         src={place.photoUrl}
         className="mx-auto aspect-video w-full rounded-md object-none"
       />
-      <h1 className="mx-4 truncate text-center text-xl">{place.name}</h1>
+      <h1 className="mx-auto max-w-xs truncate px-4 text-center text-xl">{place.name}</h1>
       <p className="text-center">{getRatingString(place)}</p>
     </div>
   )

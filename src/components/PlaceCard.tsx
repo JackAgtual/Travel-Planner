@@ -48,14 +48,14 @@ function PlaceCard({ place, setSelectedPlaces }: PlaceCardProps) {
             className="absolute right-3 top-3 rounded-full bg-slate-50"
             onClick={handleRemoveFromMapClick}
           >
-            <PiHeartDuotone className="h-12 w-12 p-1 text-red-500 hover:text-black" />
+            <PiHeartDuotone className="h-10 w-10 p-1 text-red-500 hover:text-black" />
           </button>
         ) : (
           <button
             className="absolute right-3 top-3 rounded-full bg-slate-50"
             onClick={handleAddToMapClick}
           >
-            <PiHeartDuotone className="h-12 w-12 rounded-full  p-1 text-black opacity-60 hover:text-red-500 hover:opacity-100" />
+            <PiHeartDuotone className="h-10 w-10 rounded-full p-1 text-black hover:text-red-500 hover:opacity-100" />
           </button>
         )}
       </div>

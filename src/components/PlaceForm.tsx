@@ -57,7 +57,7 @@ function PalceForm({
   }
 
   return (
-    <div className="m-2 flex flex-col items-center rounded-md border-2 px-2 py-4">
+    <div className="my-4 flex flex-col items-center rounded-md border-2 px-2 py-4">
       <h1 className="text-xl font-bold">Where would you like to go?</h1>
       <form
         onSubmit={(e) => handleDestinationFormSubmit(e)}
@@ -66,7 +66,7 @@ function PalceForm({
         <label>
           Destination:
           <input
-            className=" ml-1 rounded-md border-2 border-solid px-2"
+            className=" ml-1 rounded-md border-2 border-solid px-2 py-1"
             type="text"
             placeholder="San Francisco"
             value={destination}
@@ -79,8 +79,9 @@ function PalceForm({
           {Object.entries(queryParamToDisplayType).map((entry) => {
             const [queryParam, displayName] = entry
             return (
-              <label key={queryParam} className="flex gap-x-1">
+              <label key={queryParam} className="flex cursor-pointer gap-x-1">
                 <input
+                  className="cursor-pointer"
                   type="checkbox"
                   name={displayName}
                   value={queryParam}
@@ -91,7 +92,10 @@ function PalceForm({
             )
           })}
         </fieldset>
-        <button type="submit" className="rounded-md bg-slate-200 px-10 py-2">
+        <button
+          type="submit"
+          className="rounded-md bg-slate-200 px-10 py-2 transition hover:bg-slate-100"
+        >
           Search
         </button>
       </form>

@@ -14,6 +14,7 @@ import PlacesGrid from './components/PlacesGrid'
 import Weather from './components/Weather'
 import usePlaces from './hooks/usePlaces'
 import useGeoPoint from './hooks/useGeoPoint'
+import { AiOutlineLoading } from 'react-icons/ai'
 
 function App() {
   const [places, setPlaces] = useState<PlaceResponse>([])
@@ -44,34 +45,31 @@ function App() {
         />
 
         {loadingData ? (
-          <p className="text-center text-xl">Loading map...</p>
-        ) : (
-          <Map coordinates={mapCoordinates} selectedPlaces={selectedPlaces} />
-        )}
-        {loadingData ? (
-          <p className="text-center text-xl">Loading places...</p>
-        ) : (
-          <div className="space-y-10">
-            {places.map((place) => {
-              const name =
-                queryParamToDisplayType[
-                  place.type as keyof typeof queryParamToDisplayType
-                ]
-              return (
-                <PlacesGrid
-                  key={place.type}
-                  placeType={name}
-                  places={place.data}
-                  setSelectedPlaces={setSelectedPlaces}
-                />
-              )
-            })}
+          <div className="flex items-center justify-center space-x-3">
+            <AiOutlineLoading className="animate-spin" />
+            <p className="text-center text-xl">Loading Data ...</p>
           </div>
-        )}
-        {loadingData ? (
-          <p className="text-center text-xl">Loading weather...</p>
         ) : (
-          <Weather coordinates={mapCoordinates} />
+          <div className="mb-10 space-y-4">
+            <Map coordinates={mapCoordinates} selectedPlaces={selectedPlaces} />
+            <div className="space-y-10">
+              {places.map((place) => {
+                const name =
+                  queryParamToDisplayType[
+                    place.type as keyof typeof queryParamToDisplayType
+                  ]
+                return (
+                  <PlacesGrid
+                    key={place.type}
+                    placeType={name}
+                    places={place.data}
+                    setSelectedPlaces={setSelectedPlaces}
+                  />
+                )
+              })}
+            </div>
+            <Weather coordinates={mapCoordinates} />
+          </div>
         )}
       </div>
     </>

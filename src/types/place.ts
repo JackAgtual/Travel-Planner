@@ -1,12 +1,17 @@
 export type PlaceData = {
   name: string
   photoUrl: string
+  icon: string
   rating: number
   numRatings: number
   priceLevel: number
   location: {
     lat: number
     lon: number
+  }
+  address: {
+    line1: string
+    line2: string
   }
 }
 

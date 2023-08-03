@@ -1,4 +1,5 @@
-import { GoogleMap, useLoadScript, MarkerF } from '@react-google-maps/api'
+import { GoogleMap, useLoadScript } from '@react-google-maps/api'
+import Marker from './Marker'
 import { Coordinates, SelectedPlaces } from '../types/place'
 import { useMemo } from 'react'
 
@@ -27,10 +28,7 @@ function Map({ coordinates, selectedPlaces }: MapProps) {
         mapContainerStyle={{ width: '100%', height: '500px' }}
       >
         {[...selectedPlaces].map((place) => (
-          <MarkerF
-            key={place.name}
-            position={{ lat: place.location.lat, lng: place.location.lon }}
-          />
+          <Marker key={place.name} place={place} />
         ))}
       </GoogleMap>
     </>

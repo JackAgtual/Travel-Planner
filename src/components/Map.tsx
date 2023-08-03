@@ -1,4 +1,4 @@
-import { GoogleMap, useLoadScript } from '@react-google-maps/api'
+import { GoogleMap } from '@react-google-maps/api'
 import Marker from './Marker'
 import { Coordinates, SelectedPlaces } from '../types/place'
 import { useMemo } from 'react'
@@ -6,14 +6,11 @@ import { useMemo } from 'react'
 type MapProps = {
   coordinates: Coordinates
   selectedPlaces: SelectedPlaces
+  isLoaded: boolean
 }
 
-function Map({ coordinates, selectedPlaces }: MapProps) {
+function Map({ coordinates, selectedPlaces, isLoaded }: MapProps) {
   if (coordinates === undefined) return
-
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
-  })
 
   const mapCenter = useMemo(() => {
     return { lat: coordinates.lat, lng: coordinates.lon }

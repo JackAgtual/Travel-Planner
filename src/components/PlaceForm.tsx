@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   Coordinates,
   PlaceResponse,
@@ -6,9 +7,10 @@ import {
   SelectedPlaceTypes,
   Destination,
 } from '../types/place'
+import { Autocomplete } from '@react-google-maps/api'
 
 type PlaceFormProps = {
-  destination: Destination
+  isLoaded: boolean
   setDestination: React.Dispatch<React.SetStateAction<string>>
   setSelectedTypes: React.Dispatch<React.SetStateAction<SelectedPlaceTypes>>
   setPlaces: React.Dispatch<React.SetStateAction<PlaceResponse>>
@@ -18,7 +20,7 @@ type PlaceFormProps = {
 }
 
 function PalceForm({
-  destination,
+  isLoaded,
   setDestination,
   setSelectedTypes,
   setPlaces,
@@ -26,8 +28,21 @@ function PalceForm({
   fetchPlaces,
   fetchGeopoint,
 }: PlaceFormProps) {
-  const handleDestinationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDestination(e.target.value)
+  if (!isLoaded) return <p>Loading ...</p>
+
+  const [autocomplete, setAutocomplete] = useState<
+    google.maps.places.Autocomplete | undefined
+  >(undefined)
+  const [searchText, setSearchText] = useState('')
+
+  const handlePlaceChange = () => {
+    const destination = autocomplete?.getPlace().formatted_address || ''
+    setSearchText(destination)
+    setDestination(destination)
+  }
+
+  const handleAutocompleteLoad = (autocomplete: google.maps.places.Autocomplete) => {
+    setAutocomplete(autocomplete)
   }
 
   const handleCheckboxToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,16 +78,21 @@ function PalceForm({
         onSubmit={(e) => handleDestinationFormSubmit(e)}
         className="mx-3 mt-4 flex flex-col items-center space-y-3"
       >
-        <label>
+        <label className="md:flex md:items-center">
           Destination:
-          <input
-            className=" ml-1 rounded-md border-2 border-solid px-2 py-1"
-            type="text"
-            placeholder="San Francisco"
-            value={destination}
-            required
-            onChange={(e) => handleDestinationChange(e)}
-          ></input>
+          <Autocomplete
+            onPlaceChanged={handlePlaceChange}
+            onLoad={handleAutocompleteLoad}
+          >
+            <input
+              className="rounded-md border-2 border-solid px-2 py-1 md:ml-1"
+              type="text"
+              placeholder="Enter a destination"
+              value={searchText}
+              required
+              onChange={(e) => setSearchText(e.target.value)}
+            />
+          </Autocomplete>
         </label>
         <fieldset className="flex flex-wrap justify-center gap-3 rounded-md border p-2">
           <legend>Choose what types of places you'd like to see:</legend>

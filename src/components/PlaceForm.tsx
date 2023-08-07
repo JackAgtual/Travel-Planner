@@ -5,7 +5,6 @@ import {
   GeopointResponse,
   queryParamToDisplayType,
   SelectedPlaceTypes,
-  Destination,
 } from '../types/place'
 import { Autocomplete } from '@react-google-maps/api'
 
@@ -19,7 +18,7 @@ type PlaceFormProps = {
   fetchGeopoint: () => Promise<void | GeopointResponse> | undefined
 }
 
-function PalceForm({
+function PlaceForm({
   isLoaded,
   setDestination,
   setSelectedTypes,
@@ -58,7 +57,7 @@ function PalceForm({
     })
   }
 
-  const handleDestinationFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const placeData = await fetchPlaces()
     if (placeData) {
@@ -75,7 +74,7 @@ function PalceForm({
     <div className="my-4 flex flex-col items-center rounded-md border-2 px-2 py-4">
       <h1 className="text-xl font-bold">Where would you like to go?</h1>
       <form
-        onSubmit={(e) => handleDestinationFormSubmit(e)}
+        onSubmit={(e) => handleFormSubmit(e)}
         className="mx-3 mt-4 flex flex-col items-center space-y-3"
       >
         <label className="md:flex md:items-center">
@@ -123,4 +122,4 @@ function PalceForm({
   )
 }
 
-export default PalceForm
+export default PlaceForm

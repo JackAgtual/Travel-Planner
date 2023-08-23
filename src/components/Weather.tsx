@@ -10,8 +10,7 @@ type WeatherProps = {
 function Weather({ coordinates }: WeatherProps) {
   if (coordinates === undefined) return
 
-  const [weatherData, weatherLoading, weatherError, fetchWeather] =
-    useWeather(coordinates)
+  const [weatherData, weatherLoading, , fetchWeather] = useWeather(coordinates)
 
   useEffect(() => {
     fetchWeather()

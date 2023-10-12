@@ -7,10 +7,12 @@ import {
   SelectedPlaceTypes,
 } from '../types/place'
 import { Autocomplete } from '@react-google-maps/api'
+import { twMerge } from 'tailwind-merge'
 
 type PlaceFormProps = {
   isLoaded: boolean
   setDestination: React.Dispatch<React.SetStateAction<string>>
+  selectedTypes: SelectedPlaceTypes
   setSelectedTypes: React.Dispatch<React.SetStateAction<SelectedPlaceTypes>>
   setPlaces: React.Dispatch<React.SetStateAction<PlaceResponse>>
   setMapCoordinates: React.Dispatch<React.SetStateAction<Coordinates>>
@@ -21,6 +23,7 @@ type PlaceFormProps = {
 function PlaceForm({
   isLoaded,
   setDestination,
+  selectedTypes,
   setSelectedTypes,
   setPlaces,
   setMapCoordinates,
@@ -28,6 +31,8 @@ function PlaceForm({
   fetchGeopoint,
 }: PlaceFormProps) {
   if (!isLoaded) return <p>Loading ...</p>
+
+  const noPlaceTypeSelected = selectedTypes.size === 0
 
   const [autocomplete, setAutocomplete] = useState<
     google.maps.places.Autocomplete | undefined
@@ -59,6 +64,8 @@ function PlaceForm({
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (noPlaceTypeSelected) return
+
     const placeData = await fetchPlaces()
     if (placeData) {
       setPlaces(placeData)
@@ -113,7 +120,11 @@ function PlaceForm({
         </fieldset>
         <button
           type="submit"
-          className="rounded-md bg-slate-200 px-10 py-2 transition hover:bg-slate-100"
+          className={twMerge(
+            'rounded-md bg-slate-200 px-10 py-2 transition',
+            noPlaceTypeSelected ? 'text-slate-400' : 'hover:bg-slate-100',
+          )}
+          disabled={noPlaceTypeSelected}
         >
           Search
         </button>

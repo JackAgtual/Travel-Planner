@@ -43,6 +43,7 @@ function App() {
         <PlaceForm
           isLoaded={googleMapsIsLoaded}
           setDestination={setDestination}
+          selectedTypes={selectedTypes}
           setSelectedTypes={setSelectedTypes}
           setPlaces={setPlaces}
           setMapCoordinates={setMapCoordinates}

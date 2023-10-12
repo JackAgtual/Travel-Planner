@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { PlaceData, SelectedPlaces } from '../types/place'
 import { PiHeartDuotone } from 'react-icons/pi'
 
@@ -9,6 +9,7 @@ type PlaceCardProps = {
 
 function PlaceCard({ place, setSelectedPlaces }: PlaceCardProps) {
   const [addedToMap, setAddedToMap] = useState(false)
+  const popupRef = useRef<HTMLDialogElement>(null)
 
   const getRatingString = (place: PlaceData) => {
     if (place.numRatings === 0) {
@@ -20,7 +21,12 @@ function PlaceCard({ place, setSelectedPlaces }: PlaceCardProps) {
     })`
   }
 
-  const handleAddToMapClick = () => {
+  const handleCardClick = () => {
+    popupRef.current?.showModal()
+  }
+
+  const handleAddToMapClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation()
     setAddedToMap(true)
     setSelectedPlaces((prevPlaces) => {
       const updatedSelectedPlaces = new Set(prevPlaces)
@@ -29,7 +35,10 @@ function PlaceCard({ place, setSelectedPlaces }: PlaceCardProps) {
     })
   }
 
-  const handleRemoveFromMapClick = () => {
+  const handleRemoveFromMapClick = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    e.stopPropagation()
     setAddedToMap(false)
     setSelectedPlaces((prevPlaces) => {
       return new Set([...prevPlaces].filter((aPlace) => aPlace.name !== place.name))
@@ -37,7 +46,11 @@ function PlaceCard({ place, setSelectedPlaces }: PlaceCardProps) {
   }
 
   return (
-    <div className="mx-auto box-border flex max-w-sm flex-col justify-center rounded-md border-2 text-lg">
+    <div
+      className="mx-auto box-border flex max-w-sm flex-col justify-center rounded-md border-2 text-lg"
+      onClick={handleCardClick}
+    >
+      <dialog ref={popupRef}>{place.name}</dialog>
       <div className="relative">
         <img
           src={place.photoUrl}

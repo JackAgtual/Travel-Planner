@@ -9,6 +9,7 @@ type PlaceCardProps = {
 }
 
 function PlaceCard({ place, setSelectedPlaces }: PlaceCardProps) {
+  const [modalOpen, setModalOpen] = useState(false)
   const [addedToMap, setAddedToMap] = useState(false)
   const popupRef = useRef<HTMLDialogElement>(null)
 
@@ -23,6 +24,7 @@ function PlaceCard({ place, setSelectedPlaces }: PlaceCardProps) {
   }
 
   const handleCardClick = () => {
+    setModalOpen(true)
     popupRef.current?.showModal()
   }
 
@@ -51,7 +53,12 @@ function PlaceCard({ place, setSelectedPlaces }: PlaceCardProps) {
       className="mx-auto box-border flex max-w-sm flex-col justify-center rounded-md border-2 text-lg"
       onClick={handleCardClick}
     >
-      <PlaceModal ref={popupRef} place={place} />
+      <PlaceModal
+        ref={popupRef}
+        place={place}
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+      />
       <div className="relative">
         <img
           src={place.photoUrl}

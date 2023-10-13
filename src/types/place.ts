@@ -16,6 +16,14 @@ export type PlaceData = {
   }
 }
 
+export type PlaceDetails = {
+  address: string
+  phoneNumber: string
+  photoUrls: string[]
+  id: string
+  website: string
+}
+
 export type PlaceResponse = {
   type: string
   data: PlaceData[]

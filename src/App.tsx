@@ -9,7 +9,7 @@ import {
   Destination,
   SelectedPlaces,
 } from './types/place'
-import usePlaces from './hooks/usePlaces'
+import usePlaceSearch from './hooks/usePlaceSearch'
 import useGeoPoint from './hooks/useGeoPoint'
 import { useLoadScript } from '@react-google-maps/api'
 import { Library } from '@googlemaps/js-api-loader'
@@ -22,7 +22,7 @@ function App() {
   const [mapCoordinates, setMapCoordinates] = useState<Coordinates>(undefined)
   const [destination, setDestination] = useState<Destination>('')
   const [selectedTypes, setSelectedTypes] = useState<SelectedPlaceTypes>(new Set([]))
-  const [, placesLoading, placesError, fetchPlaces] = usePlaces(
+  const [, placesLoading, placesError, fetchPlaces] = usePlaceSearch(
     selectedTypes,
     destination,
   )

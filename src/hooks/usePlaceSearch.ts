@@ -2,7 +2,7 @@ import useFetch from './useFetch'
 import { PlaceResponse, SelectedPlaceTypes } from '../types/place'
 const BASE_URL = import.meta.env.VITE_BASE_URL
 
-export default function usePlaces(
+export default function usePlaceSearch(
   typesOfPlaces: SelectedPlaceTypes,
   destination: string,
 ) {
@@ -11,6 +11,6 @@ export default function usePlaces(
     search.append('types[]', type)
   })
   search.append('destination', destination)
-  const url = `${BASE_URL}/place?${search.toString()}`
+  const url = `${BASE_URL}/place/search?${search.toString()}`
   return useFetch<PlaceResponse>(url)
 }

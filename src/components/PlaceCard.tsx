@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import { PlaceData, SelectedPlaces } from '../types/place'
 import { PiHeartDuotone } from 'react-icons/pi'
+import PlaceModal from './PlaceModal'
 
 type PlaceCardProps = {
   place: PlaceData
@@ -50,7 +51,7 @@ function PlaceCard({ place, setSelectedPlaces }: PlaceCardProps) {
       className="mx-auto box-border flex max-w-sm flex-col justify-center rounded-md border-2 text-lg"
       onClick={handleCardClick}
     >
-      <dialog ref={popupRef}>{place.name}</dialog>
+      <PlaceModal ref={popupRef} place={place} />
       <div className="relative">
         <img
           src={place.photoUrl}

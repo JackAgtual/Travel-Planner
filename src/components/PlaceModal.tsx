@@ -51,7 +51,15 @@ function PlaceModal(
 
   return (
     <dialog ref={ref}>
-      <h1 className="text-center text-2xl">{place.name}</h1>
+      <div className="flex items-center justify-between gap-x-4 pb-4">
+        <h1 className="text-center text-2xl">{place.name}</h1>
+        <FavoriteIcon
+          place={place}
+          setSelectedPlaces={setSelectedPlaces}
+          addedToMap={addedToMap}
+          setAddedToMap={setAddedToMap}
+        />
+      </div>
       <a
         className="text-blue-600 underline visited:text-purple-600 hover:text-blue-800"
         href={placeDetails?.address.googleMapsUrl}
@@ -73,12 +81,6 @@ function PlaceModal(
           return <li key={idx}>{hours}</li>
         })}
       </ul>
-      <FavoriteIcon
-        place={place}
-        setSelectedPlaces={setSelectedPlaces}
-        addedToMap={addedToMap}
-        setAddedToMap={setAddedToMap}
-      />
     </dialog>
   )
 }

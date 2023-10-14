@@ -26,7 +26,6 @@ function PlaceModal(
   const [placeDetails, , , fetchDetails] = usePlaceDetails(place.id)
 
   const handleCardClose = () => {
-    console.log(`${place.name} closed`)
     setModalOpen(false)
   }
 

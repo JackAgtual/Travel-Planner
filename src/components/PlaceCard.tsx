@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
 import { PlaceData, SelectedPlaces } from '../types/place'
-import { PiHeartDuotone } from 'react-icons/pi'
 import PlaceModal from './PlaceModal'
+import FavoriteIcon from './FavoriteIcon'
 
 type PlaceCardProps = {
   place: PlaceData
@@ -10,7 +10,6 @@ type PlaceCardProps = {
 
 function PlaceCard({ place, setSelectedPlaces }: PlaceCardProps) {
   const [modalOpen, setModalOpen] = useState(false)
-  const [addedToMap, setAddedToMap] = useState(false)
   const popupRef = useRef<HTMLDialogElement>(null)
 
   const getRatingString = (place: PlaceData) => {
@@ -26,26 +25,6 @@ function PlaceCard({ place, setSelectedPlaces }: PlaceCardProps) {
   const handleCardClick = () => {
     setModalOpen(true)
     popupRef.current?.showModal()
-  }
-
-  const handleAddToMapClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.stopPropagation()
-    setAddedToMap(true)
-    setSelectedPlaces((prevPlaces) => {
-      const updatedSelectedPlaces = new Set(prevPlaces)
-      updatedSelectedPlaces.add(place)
-      return updatedSelectedPlaces
-    })
-  }
-
-  const handleRemoveFromMapClick = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => {
-    e.stopPropagation()
-    setAddedToMap(false)
-    setSelectedPlaces((prevPlaces) => {
-      return new Set([...prevPlaces].filter((aPlace) => aPlace.name !== place.name))
-    })
   }
 
   return (
@@ -64,21 +43,7 @@ function PlaceCard({ place, setSelectedPlaces }: PlaceCardProps) {
           src={place.photoUrl}
           className="mx-auto aspect-video w-full rounded-md object-none"
         />
-        {addedToMap ? (
-          <button
-            className="absolute right-3 top-3 rounded-full bg-slate-50"
-            onClick={handleRemoveFromMapClick}
-          >
-            <PiHeartDuotone className="h-10 w-10 p-1 text-red-500 hover:text-black" />
-          </button>
-        ) : (
-          <button
-            className="absolute right-3 top-3 rounded-full bg-slate-50"
-            onClick={handleAddToMapClick}
-          >
-            <PiHeartDuotone className="h-10 w-10 rounded-full p-1 text-black hover:text-red-500 hover:opacity-100" />
-          </button>
-        )}
+        <FavoriteIcon place={place} setSelectedPlaces={setSelectedPlaces} />
       </div>
       <h1 className="mx-auto max-w-xs truncate px-4 text-center text-xl">{place.name}</h1>
       <p className="text-center">{getRatingString(place)}</p>

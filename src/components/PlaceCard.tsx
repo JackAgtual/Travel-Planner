@@ -48,6 +48,7 @@ function PlaceCard({ place, setSelectedPlaces }: PlaceCardProps) {
           className="mx-auto aspect-video w-full rounded-md object-none"
         />
         <FavoriteIcon
+          className="absolute right-3 top-3 rounded-full bg-slate-50"
           place={place}
           setSelectedPlaces={setSelectedPlaces}
           addedToMap={addedToMap}

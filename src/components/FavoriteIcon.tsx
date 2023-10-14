@@ -1,8 +1,9 @@
+import { ButtonHTMLAttributes } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { SelectedPlaces, PlaceData } from '../types/place'
 import { PiHeartDuotone } from 'react-icons/pi'
 
-type FavoriteIconProps = {
+type FavoriteIconProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   place: PlaceData
   setSelectedPlaces: React.Dispatch<React.SetStateAction<SelectedPlaces>>
   addedToMap: boolean
@@ -10,6 +11,7 @@ type FavoriteIconProps = {
 }
 
 function FavoriteIcon({
+  className,
   place,
   setSelectedPlaces,
   addedToMap,
@@ -37,7 +39,7 @@ function FavoriteIcon({
 
   return (
     <button
-      className="absolute right-3 top-3 rounded-full bg-slate-50"
+      className={className}
       onClick={addedToMap ? handleRemoveFromMapClick : handleAddToMapClick}
     >
       <PiHeartDuotone

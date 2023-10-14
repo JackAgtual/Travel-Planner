@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { SelectedPlaces, PlaceData } from '../types/place'
 import { PiHeartDuotone } from 'react-icons/pi'
@@ -6,11 +5,16 @@ import { PiHeartDuotone } from 'react-icons/pi'
 type FavoriteIconProps = {
   place: PlaceData
   setSelectedPlaces: React.Dispatch<React.SetStateAction<SelectedPlaces>>
+  addedToMap: boolean
+  setAddedToMap: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-function FavoriteIcon({ place, setSelectedPlaces }: FavoriteIconProps) {
-  const [addedToMap, setAddedToMap] = useState(false)
-
+function FavoriteIcon({
+  place,
+  setSelectedPlaces,
+  addedToMap,
+  setAddedToMap,
+}: FavoriteIconProps) {
   const handleAddToMapClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation()
     setAddedToMap(true)

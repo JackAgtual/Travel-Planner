@@ -17,11 +17,15 @@ export type PlaceData = {
 }
 
 export type PlaceDetails = {
-  address: string
+  address: {
+    formatted: string
+    googleMapsUrl: string
+  }
   phoneNumber: string
   photoUrls: string[]
   id: string
   website: string
+  businessHours: string[]
 }
 
 export type PlaceResponse = {

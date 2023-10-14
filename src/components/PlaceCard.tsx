@@ -9,6 +9,7 @@ type PlaceCardProps = {
 }
 
 function PlaceCard({ place, setSelectedPlaces }: PlaceCardProps) {
+  const [addedToMap, setAddedToMap] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
   const popupRef = useRef<HTMLDialogElement>(null)
 
@@ -37,13 +38,21 @@ function PlaceCard({ place, setSelectedPlaces }: PlaceCardProps) {
         place={place}
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
+        setSelectedPlaces={setSelectedPlaces}
+        addedToMap={addedToMap}
+        setAddedToMap={setAddedToMap}
       />
       <div className="relative">
         <img
           src={place.photoUrl}
           className="mx-auto aspect-video w-full rounded-md object-none"
         />
-        <FavoriteIcon place={place} setSelectedPlaces={setSelectedPlaces} />
+        <FavoriteIcon
+          place={place}
+          setSelectedPlaces={setSelectedPlaces}
+          addedToMap={addedToMap}
+          setAddedToMap={setAddedToMap}
+        />
       </div>
       <h1 className="mx-auto max-w-xs truncate px-4 text-center text-xl">{place.name}</h1>
       <p className="text-center">{getRatingString(place)}</p>

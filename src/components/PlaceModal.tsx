@@ -1,15 +1,26 @@
 import { useEffect, forwardRef, ForwardedRef } from 'react'
 import usePlaceDetails from '../hooks/usePlaceDetails'
-import { PlaceData } from '../types/place'
+import { PlaceData, SelectedPlaces } from '../types/place'
+import FavoriteIcon from './FavoriteIcon'
 
 type PlaceModalProps = {
   place: PlaceData
   modalOpen: boolean
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setSelectedPlaces: React.Dispatch<React.SetStateAction<SelectedPlaces>>
+  addedToMap: boolean
+  setAddedToMap: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 function PlaceModal(
-  { place, modalOpen, setModalOpen }: PlaceModalProps,
+  {
+    place,
+    modalOpen,
+    setModalOpen,
+    setSelectedPlaces,
+    addedToMap,
+    setAddedToMap,
+  }: PlaceModalProps,
   ref: ForwardedRef<HTMLDialogElement>,
 ) {
   const [placeDetails, , , fetchDetails] = usePlaceDetails(place.id)
@@ -41,10 +52,34 @@ function PlaceModal(
 
   return (
     <dialog ref={ref}>
-      {/* // placeholder information */}
-      <h1>{place.name}</h1>
-      <p>{placeDetails?.address}</p>
+      <h1 className="text-center text-2xl">{place.name}</h1>
+      <a
+        className="text-blue-600 underline visited:text-purple-600 hover:text-blue-800"
+        href={placeDetails?.address.googleMapsUrl}
+        target="_blank"
+      >
+        {placeDetails?.address.formatted}
+      </a>
       <p>{placeDetails?.phoneNumber}</p>
+      <a
+        className="text-blue-600 underline visited:text-purple-600 hover:text-blue-800"
+        href={placeDetails?.website}
+        target="_blank"
+      >
+        Visit their website
+      </a>
+      <h2>Hours:</h2>
+      <ul>
+        {placeDetails?.businessHours.map((hours, idx) => {
+          return <li key={idx}>{hours}</li>
+        })}
+      </ul>
+      <FavoriteIcon
+        place={place}
+        setSelectedPlaces={setSelectedPlaces}
+        addedToMap={addedToMap}
+        setAddedToMap={setAddedToMap}
+      />
     </dialog>
   )
 }

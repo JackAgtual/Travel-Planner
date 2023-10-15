@@ -26,6 +26,14 @@ export type PlaceDetails = {
   id: string
   website: string
   businessHours: string[]
+  reviews: {
+    author: string
+    authorUrl: string
+    authorPhoto: string
+    rating: number
+    time: string
+    text: string
+  }[]
 }
 
 export type PlaceResponse = {

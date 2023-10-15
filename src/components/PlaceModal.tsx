@@ -2,6 +2,7 @@ import { useEffect, forwardRef, ForwardedRef } from 'react'
 import usePlaceDetails from '../hooks/usePlaceDetails'
 import { PlaceData, SelectedPlaces } from '../types/place'
 import FavoriteIcon from './FavoriteIcon'
+import Reviews from './Reviews'
 
 type PlaceModalProps = {
   place: PlaceData
@@ -83,6 +84,8 @@ function PlaceModal(
           return <li key={idx}>{hours}</li>
         })}
       </ul>
+      <h2>Reviews</h2>
+      <Reviews reviews={placeDetails?.reviews || []} />
     </dialog>
   )
 }

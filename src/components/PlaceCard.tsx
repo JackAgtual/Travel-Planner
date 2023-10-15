@@ -25,7 +25,6 @@ function PlaceCard({ place, setSelectedPlaces }: PlaceCardProps) {
 
   const handleCardClick = () => {
     setModalOpen(true)
-    popupRef.current?.showModal()
   }
 
   return (

@@ -38,6 +38,8 @@ function PlaceModal(
 
     if (!cardElement) return
 
+    cardElement.showModal()
+
     cardElement.addEventListener('cancel', handleCardClose)
     cardElement.addEventListener('close', handleCardClose)
 
@@ -50,7 +52,7 @@ function PlaceModal(
   }, [modalOpen])
 
   return (
-    <dialog ref={ref}>
+    <dialog autoFocus={false} ref={ref}>
       <div className="flex items-center justify-between gap-x-4 pb-4">
         <h1 className="text-center text-2xl">{place.name}</h1>
         <FavoriteIcon

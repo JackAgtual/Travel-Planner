@@ -12,10 +12,8 @@ function Rating({ rating, maxRating = 5 }: RatingProps) {
   const stars: IconType[] = []
   for (let i = 0; i <= maxRating; i++) {
     if (i <= rounedRating) {
-      // filled star
       stars.push(AiFillStar)
     } else {
-      // empty star
       stars.push(AiOutlineStar)
     }
   }

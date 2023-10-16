@@ -22,7 +22,7 @@ function Reviews({ reviews }: ReviewsProps) {
     <div className="space-y-6">
       {reviews.map((review, idx) => {
         return (
-          <div className="border-b border-gray-300 pb-6 last:border-0">
+          <div key={idx} className="border-b border-gray-300 pb-6 last:border-0">
             <div className="flex items-center gap-x-3">
               <img
                 src={review.authorPhoto}

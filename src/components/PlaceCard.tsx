@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react'
 import { PlaceData, SelectedPlaces } from '../types/place'
+import Rating from './Rating'
 import PlaceModal from './PlaceModal'
 import FavoriteIcon from './FavoriteIcon'
 
@@ -13,14 +14,12 @@ function PlaceCard({ place, setSelectedPlaces }: PlaceCardProps) {
   const [modalOpen, setModalOpen] = useState(false)
   const popupRef = useRef<HTMLDialogElement>(null)
 
-  const getRatingString = (place: PlaceData) => {
+  const getRatingString = () => {
     if (place.numRatings === 0) {
       return 'No ratings'
     }
 
-    return `${place.rating} / 5 (${place.numRatings} ${
-      place.numRatings === 1 ? 'rating' : 'ratings'
-    })`
+    return `${place.numRatings} ${place.numRatings === 1 ? 'rating' : 'ratings'}`
   }
 
   const handleCardClick = () => {
@@ -55,7 +54,11 @@ function PlaceCard({ place, setSelectedPlaces }: PlaceCardProps) {
         />
       </div>
       <h1 className="mx-auto max-w-xs truncate px-4 text-center text-xl">{place.name}</h1>
-      <p className="text-center">{getRatingString(place)}</p>
+      <div className="mx-auto flex items-center space-x-2">
+        <Rating rating={place.rating} />
+        <p>{place.rating}</p>
+        <p className="text-gray-500">{getRatingString()}</p>
+      </div>
     </div>
   )
 }

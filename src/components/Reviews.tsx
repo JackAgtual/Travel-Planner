@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io'
 import { PlaceDetails } from '../types/place'
+import Rating from './Rating'
 
 type ReviewsProps = Pick<PlaceDetails, 'reviews'>
 
@@ -31,7 +32,7 @@ function Reviews({ reviews }: ReviewsProps) {
               <h3>{review.author}</h3>
             </div>
             <div className="flex items-center gap-x-4">
-              <p>{`${review.rating} / 5`}</p>
+              <Rating rating={review.rating} />
               <p>{review.time}</p>
             </div>
             <p className={expanded[idx] ? '' : 'truncate'}>{review.text}</p>

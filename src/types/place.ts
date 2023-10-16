@@ -34,6 +34,7 @@ export type PlaceDetails = {
     time: string
     text: string
   }[]
+  description: string
 }
 
 export type PlaceResponse = {

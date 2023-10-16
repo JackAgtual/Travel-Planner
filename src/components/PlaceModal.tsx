@@ -76,8 +76,8 @@ function PlaceModal(
   }, [modalOpen])
 
   return (
-    <dialog autoFocus={false} ref={ref}>
-      <div className="flex items-center justify-between gap-x-4 pb-4">
+    <dialog autoFocus={false} ref={ref} className="space-y-4">
+      <div className="flex items-center justify-between gap-x-4">
         <h1 className="text-center text-2xl">{place.name}</h1>
         <div className="flex items-center gap-x-4">
           <FavoriteIcon
@@ -91,28 +91,33 @@ function PlaceModal(
           </button>
         </div>
       </div>
-      <a
-        className="text-blue-600 underline visited:text-purple-600 hover:text-blue-800"
-        href={placeDetails?.address.googleMapsUrl}
-        target="_blank"
-      >
-        {placeDetails?.address.formatted}
-      </a>
-      <p>{placeDetails?.phoneNumber}</p>
-      <a
-        className="text-blue-600 underline visited:text-purple-600 hover:text-blue-800"
-        href={placeDetails?.website}
-        target="_blank"
-      >
-        Visit their website
-      </a>
-      <h2>Hours:</h2>
-      <ul>
-        {placeDetails?.businessHours.map((hours, idx) => {
-          return <li key={idx}>{hours}</li>
-        })}
-      </ul>
-      <h2>Reviews</h2>
+      <p>{placeDetails?.description}</p>
+      <div>
+        <a
+          className="text-blue-600 underline visited:text-purple-600 hover:text-blue-800"
+          href={placeDetails?.address.googleMapsUrl}
+          target="_blank"
+        >
+          {placeDetails?.address.formatted}
+        </a>
+        <p>{placeDetails?.phoneNumber}</p>
+        <a
+          className="text-blue-600 underline visited:text-purple-600 hover:text-blue-800"
+          href={placeDetails?.website}
+          target="_blank"
+        >
+          Visit their website
+        </a>
+      </div>
+      <div>
+        <h2 className="text-xl font-semibold">Hours:</h2>
+        <ul>
+          {placeDetails?.businessHours.map((hours, idx) => {
+            return <li key={idx}>{hours}</li>
+          })}
+        </ul>
+      </div>
+      <h2 className="text-xl font-semibold">Reviews</h2>
       <Reviews reviews={placeDetails?.reviews || []} />
     </dialog>
   )

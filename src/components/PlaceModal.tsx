@@ -3,6 +3,7 @@ import usePlaceDetails from '../hooks/usePlaceDetails'
 import { PlaceData, SelectedPlaces } from '../types/place'
 import FavoriteIcon from './FavoriteIcon'
 import Reviews from './Reviews'
+import { AiOutlineCloseCircle } from 'react-icons/ai'
 
 type PlaceModalProps = {
   place: PlaceData
@@ -30,6 +31,26 @@ function PlaceModal(
     setModalOpen(false)
   }
 
+  const closeModal = () => {
+    if (!ref || typeof ref === 'function') return
+    ref.current?.close()
+  }
+
+  const handleModalClick = (e: MouseEvent) => {
+    if (!ref || typeof ref === 'function') return
+
+    const rect = ref.current?.getBoundingClientRect()
+
+    if (!rect) return
+
+    const { left, right, top, bottom } = rect
+    const { clientX: clickX, clientY: clickY } = e
+
+    if (clickX < left || clickX > right || clickY > bottom || clickY < top) {
+      closeModal()
+    }
+  }
+
   useEffect(() => {
     if (!ref || typeof ref === 'function') return
 
@@ -43,12 +64,14 @@ function PlaceModal(
 
     cardElement.addEventListener('cancel', handleCardClose)
     cardElement.addEventListener('close', handleCardClose)
+    cardElement.addEventListener('click', handleModalClick)
 
     fetchDetails()
 
     return () => {
       cardElement.removeEventListener('cancel', handleCardClose)
       cardElement.removeEventListener('close', handleCardClose)
+      cardElement.removeEventListener('click', handleModalClick)
     }
   }, [modalOpen])
 
@@ -56,12 +79,17 @@ function PlaceModal(
     <dialog autoFocus={false} ref={ref}>
       <div className="flex items-center justify-between gap-x-4 pb-4">
         <h1 className="text-center text-2xl">{place.name}</h1>
-        <FavoriteIcon
-          place={place}
-          setSelectedPlaces={setSelectedPlaces}
-          addedToMap={addedToMap}
-          setAddedToMap={setAddedToMap}
-        />
+        <div className="flex items-center gap-x-4">
+          <FavoriteIcon
+            place={place}
+            setSelectedPlaces={setSelectedPlaces}
+            addedToMap={addedToMap}
+            setAddedToMap={setAddedToMap}
+          />
+          <button onClick={closeModal}>
+            <AiOutlineCloseCircle className="h-7 w-7" />
+          </button>
+        </div>
       </div>
       <a
         className="text-blue-600 underline visited:text-purple-600 hover:text-blue-800"

@@ -18,23 +18,23 @@ export type PlaceData = {
 
 export type PlaceDetails = {
   address: {
-    formatted: string
-    googleMapsUrl: string
+    formatted: string | null
+    googleMapsUrl: string | null
   }
-  phoneNumber: string
-  photoUrls: string[]
-  id: string
-  website: string
-  businessHours: string[]
+  phoneNumber: string | null
+  photoUrls: string[] | null
+  id: string | null
+  website: string | null
+  businessHours: string[] | null
   reviews: {
-    author: string
-    authorUrl: string
-    authorPhoto: string
-    rating: number
-    time: string
-    text: string
+    author: string | null
+    authorUrl: string | null
+    authorPhoto: string | null
+    rating: number | null
+    time: string | null
+    text: string | null
   }[]
-  description: string
+  description: string | null
 }
 
 export type PlaceResponse = {

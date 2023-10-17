@@ -3,11 +3,11 @@ import { IconType } from 'react-icons'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 
 type RatingProps = {
-  rating: number
+  rating: number | null
   maxRating?: number
 }
 function Rating({ rating, maxRating = 5 }: RatingProps) {
-  const rounedRating = Math.round(rating)
+  const rounedRating = Math.round(rating ?? 0)
 
   const stars: IconType[] = []
   for (let i = 0; i < maxRating; i++) {

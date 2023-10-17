@@ -95,30 +95,38 @@ function PlaceModal(
       <div>
         <a
           className="text-blue-600 underline visited:text-purple-600 hover:text-blue-800"
-          href={placeDetails?.address.googleMapsUrl}
+          href={placeDetails?.address?.googleMapsUrl || '#'}
           target="_blank"
         >
-          {placeDetails?.address.formatted}
+          {placeDetails?.address?.formatted || ''}
         </a>
         <p>{placeDetails?.phoneNumber}</p>
-        <a
-          className="text-blue-600 underline visited:text-purple-600 hover:text-blue-800"
-          href={placeDetails?.website}
-          target="_blank"
-        >
-          Visit their website
-        </a>
+        {placeDetails?.website !== null && (
+          <a
+            className="text-blue-600 underline visited:text-purple-600 hover:text-blue-800"
+            href={placeDetails?.website}
+            target="_blank"
+          >
+            Visit their website
+          </a>
+        )}
       </div>
-      <div>
-        <h2 className="text-xl font-semibold">Hours:</h2>
-        <ul>
-          {placeDetails?.businessHours.map((hours, idx) => {
-            return <li key={idx}>{hours}</li>
-          })}
-        </ul>
-      </div>
-      <h2 className="text-xl font-semibold">Reviews</h2>
-      <Reviews reviews={placeDetails?.reviews || []} />
+      {placeDetails?.businessHours !== null && (
+        <div>
+          <h2 className="text-xl font-semibold">Hours:</h2>
+          <ul>
+            {placeDetails?.businessHours?.map((hours, idx) => {
+              return <li key={idx}>{hours}</li>
+            })}
+          </ul>
+        </div>
+      )}
+      {placeDetails?.reviews !== null && (
+        <>
+          <h2 className="text-xl font-semibold">Reviews</h2>
+          <Reviews reviews={placeDetails?.reviews || []} />
+        </>
+      )}
     </dialog>
   )
 }

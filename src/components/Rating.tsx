@@ -10,8 +10,8 @@ function Rating({ rating, maxRating = 5 }: RatingProps) {
   const rounedRating = Math.round(rating)
 
   const stars: IconType[] = []
-  for (let i = 0; i <= maxRating; i++) {
-    if (i <= rounedRating) {
+  for (let i = 0; i < maxRating; i++) {
+    if (i < rounedRating) {
       stars.push(AiFillStar)
     } else {
       stars.push(AiOutlineStar)

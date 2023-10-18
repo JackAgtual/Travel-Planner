@@ -14,13 +14,6 @@ import useGeoPoint from './hooks/useGeoPoint'
 import { useLoadScript } from '@react-google-maps/api'
 import { Library } from '@googlemaps/js-api-loader'
 
-import ImageCarousel from './components/ImageCarousel'
-import img1 from '../assets/img1.png'
-import img2 from '../assets/img2.png'
-import img3 from '../assets/img3.png'
-import img4 from '../assets/img4.png'
-
-const images = [img1, img2, img3, img4]
 const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 const GOOGLE_LIBRARIES: Library[] = ['places']
 
@@ -57,9 +50,6 @@ function App() {
           fetchPlaces={fetchPlaces}
           fetchGeopoint={fetchGeopoint}
         />
-        <div className="h-80">
-          <ImageCarousel images={images} />
-        </div>
         <DestinationDisplay
           loadingDestination={loadingData}
           destinationError={destinationError}

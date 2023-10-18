@@ -28,19 +28,19 @@ function ImageCarousel({ images }: ImageCarouselProps) {
       <img
         key={images[imageIdx]}
         src={images[imageIdx]}
-        className="h-full w-full object-cover"
+        className="h-full w-full rounded-lg object-cover"
       />
       <button
-        className="absolute bottom-1/2 left-0 h-full translate-y-1/2 from-gray-700 pl-4 pr-3 hover:bg-gradient-to-r"
+        className="absolute bottom-1/2 left-0 h-full translate-y-1/2 rounded-lg px-4 transition-all hover:bg-black hover:bg-opacity-25"
         onClick={decrementImage}
       >
         <IoIosArrowBack className="h-10 w-10 fill-white stroke-2" />
       </button>
       <button
-        className="absolute bottom-1/2 right-0 h-full translate-y-1/2 from-gray-700 pl-3 pr-4 hover:bg-gradient-to-l"
+        className="absolute bottom-1/2 right-0 h-full translate-y-1/2 rounded-lg px-4 transition-all hover:bg-black hover:bg-opacity-25"
         onClick={incrementImage}
       >
-        <IoIosArrowForward className="h-10 w-10  fill-white" />
+        <IoIosArrowForward className="h-10 w-10 fill-white stroke-2" />
       </button>
     </div>
   )

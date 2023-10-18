@@ -24,6 +24,10 @@ function ImageCarousel({ images }: ImageCarouselProps) {
     setImageIdx(newIdx)
   }
 
+  const handleIndexClick = (targetIndex: number) => {
+    setImageIdx(targetIndex)
+  }
+
   return (
     <div className="relative h-full w-full">
       <img
@@ -46,9 +50,15 @@ function ImageCarousel({ images }: ImageCarouselProps) {
       <div className="absolute bottom-2 right-1/2 flex translate-x-1/2 gap-x-3 rounded-full bg-slate-200 bg-opacity-50 px-2 py-1">
         {images.map((_, idx) =>
           idx === imageIdx ? (
-            <BsCircleFill className="h-4 w-4" />
+            <BsCircleFill
+              onClick={() => handleIndexClick(idx)}
+              className="h-4 w-4 cursor-pointer transition-all hover:scale-125"
+            />
           ) : (
-            <BsCircle className="h-4 w-4" />
+            <BsCircle
+              onClick={() => handleIndexClick(idx)}
+              className="h-4 w-4 cursor-pointer transition-all hover:scale-125"
+            />
           ),
         )}
       </div>

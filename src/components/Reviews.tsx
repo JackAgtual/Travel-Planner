@@ -35,7 +35,7 @@ function Reviews({ reviews }: ReviewsProps) {
               <Rating rating={review.rating} />
               <p>{review.time}</p>
             </div>
-            <p className={expanded[idx] ? '' : 'truncate'}>{review.text}</p>
+            <p className={expanded[idx] ? '' : 'line-clamp-1'}>{review.text}</p>
             {expanded[idx] ? (
               <button onClick={() => handleExpand(idx)}>
                 <div className="flex items-center gap-x-1">

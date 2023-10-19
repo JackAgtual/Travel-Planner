@@ -1,6 +1,7 @@
 import { useEffect, forwardRef, ForwardedRef } from 'react'
 import usePlaceDetails from '../hooks/usePlaceDetails'
 import { PlaceData, SelectedPlaces } from '../types/place'
+import ImageCarousel from './ImageCarousel'
 import FavoriteIcon from './FavoriteIcon'
 import Reviews from './Reviews'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
@@ -76,7 +77,7 @@ function PlaceModal(
   }, [modalOpen])
 
   return (
-    <dialog autoFocus={false} ref={ref} className="space-y-4">
+    <dialog autoFocus={false} ref={ref} className="max-w-5xl space-y-4">
       <div className="flex items-center justify-between gap-x-4">
         <h1 className="text-center text-2xl">{place.name}</h1>
         <div className="flex items-center gap-x-4">
@@ -90,6 +91,9 @@ function PlaceModal(
             <AiOutlineCloseCircle className="h-7 w-7" />
           </button>
         </div>
+      </div>
+      <div className="aspect-video">
+        <ImageCarousel images={placeDetails?.photoUrls} />
       </div>
       <p>{placeDetails?.description}</p>
       <div>

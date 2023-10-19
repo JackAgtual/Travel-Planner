@@ -3,10 +3,12 @@ import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 import { BsCircleFill, BsCircle } from 'react-icons/bs'
 
 type ImageCarouselProps = {
-  images: string[]
+  images: string[] | null | undefined
 }
 function ImageCarousel({ images }: ImageCarouselProps) {
   const [imageIdx, setImageIdx] = useState(0)
+
+  if (!images) return
 
   const incrementImage = () => {
     let newIdx = imageIdx + 1
@@ -47,15 +49,17 @@ function ImageCarousel({ images }: ImageCarouselProps) {
       >
         <IoIosArrowForward className="h-10 w-10 fill-white stroke-2 transition-all group-hover:scale-150" />
       </button>
-      <div className="absolute bottom-2 right-1/2 flex translate-x-1/2 gap-x-3 rounded-full bg-slate-200 bg-opacity-50 px-2 py-1">
+      <div className="absolute bottom-2 right-1/2 flex max-w-full translate-x-1/2 gap-x-3 rounded-full bg-slate-200 bg-opacity-50 px-2 py-1">
         {images.map((_, idx) =>
           idx === imageIdx ? (
             <BsCircleFill
+              key={idx}
               onClick={() => handleIndexClick(idx)}
               className="h-4 w-4 cursor-pointer transition-all hover:scale-125"
             />
           ) : (
             <BsCircle
+              key={idx}
               onClick={() => handleIndexClick(idx)}
               className="h-4 w-4 cursor-pointer transition-all hover:scale-125"
             />

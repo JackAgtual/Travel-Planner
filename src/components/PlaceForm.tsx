@@ -1,4 +1,8 @@
 import { useState } from 'react'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { notifyLoading, timeBeforeNotification } from '../utils/toast'
+import useTimer from '../hooks/useTimer'
 import {
   Coordinates,
   PlaceResponse,
@@ -49,14 +53,13 @@ function PlaceForm({
   fetchPlaces,
   fetchGeopoint,
 }: PlaceFormProps) {
-  if (!isLoaded) return <p>Loading ...</p>
-
   const noPlaceTypeSelected = selectedTypes.size === 0
 
   const [autocomplete, setAutocomplete] = useState<
     google.maps.places.Autocomplete | undefined
   >(undefined)
   const [searchText, setSearchText] = useState('')
+  const [startTimer, stopTimer] = useTimer(timeBeforeNotification, notifyLoading)
 
   const handlePlaceChange = () => {
     const destination = autocomplete?.getPlace().formatted_address || ''
@@ -85,6 +88,8 @@ function PlaceForm({
     e.preventDefault()
     if (noPlaceTypeSelected) return
 
+    startTimer()
+
     const placeData = await fetchPlaces()
     if (placeData) {
       setPlaces(placeData)
@@ -94,10 +99,15 @@ function PlaceForm({
     if (geopointData) {
       setMapCoordinates({ lat: geopointData.lat, lon: geopointData.lon })
     }
+
+    stopTimer()
   }
+
+  if (!isLoaded) return <p>Loading ...</p>
 
   return (
     <div className="my-4 flex flex-col items-center rounded-md border-2 px-2 py-4">
+      <ToastContainer />
       <h1 className="text-xl font-bold">Where would you like to go?</h1>
       <form
         onSubmit={(e) => handleFormSubmit(e)}

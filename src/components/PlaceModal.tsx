@@ -77,7 +77,7 @@ function PlaceModal(
   }, [modalOpen])
 
   return (
-    <dialog autoFocus={false} ref={ref} className="max-w-5xl space-y-4">
+    <dialog autoFocus={false} ref={ref} className="max-w-5xl cursor-auto space-y-4">
       <div className="flex items-center justify-between gap-x-4">
         <h1 className="text-center text-2xl">{place.name}</h1>
         <div className="flex items-center gap-x-4">

@@ -28,7 +28,7 @@ function PlaceCard({ place, setSelectedPlaces }: PlaceCardProps) {
 
   return (
     <div
-      className="mx-auto box-border flex max-w-sm flex-col justify-center rounded-md border-2 text-lg"
+      className="mx-auto box-border flex max-w-sm cursor-pointer flex-col justify-center rounded-md border-2 text-lg"
       onClick={handleCardClick}
     >
       <PlaceModal

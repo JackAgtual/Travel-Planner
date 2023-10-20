@@ -55,7 +55,6 @@ export const queryParamToDisplayType = {
   art_gallery: 'Art Galleries',
   bakery: 'Bakeries',
   car_rental: 'Car Rentals',
-  city_hall: 'City Halls',
   lodging: 'Lodging',
   museum: 'Museums',
   night_club: 'Night Clubs',

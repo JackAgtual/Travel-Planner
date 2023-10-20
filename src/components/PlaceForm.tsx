@@ -8,6 +8,12 @@ import {
 } from '../types/place'
 import { Autocomplete } from '@react-google-maps/api'
 import { twMerge } from 'tailwind-merge'
+import { AiOutlineCar, AiOutlineCamera } from 'react-icons/ai'
+import { BiRestaurant, BiBeer, BiHotel } from 'react-icons/bi'
+import { BsMusicNoteBeamed } from 'react-icons/bs'
+import { MdLocalAirport, MdOutlineBakeryDining, MdOutlineMuseum } from 'react-icons/md'
+import { GrStatusUnknown } from 'react-icons/gr'
+import { IconType } from 'react-icons'
 
 type PlaceFormProps = {
   isLoaded: boolean
@@ -18,6 +24,19 @@ type PlaceFormProps = {
   setMapCoordinates: React.Dispatch<React.SetStateAction<Coordinates>>
   fetchPlaces: () => Promise<void | PlaceResponse> | undefined
   fetchGeopoint: () => Promise<void | GeopointResponse> | undefined
+}
+
+const placeTypeToIcon: { [key: string]: IconType } = {
+  restaurant: BiRestaurant,
+  bar: BiBeer,
+  airport: MdLocalAirport,
+  art_gallery: BiRestaurant,
+  bakery: MdOutlineBakeryDining,
+  car_rental: AiOutlineCar,
+  lodging: BiHotel,
+  museum: MdOutlineMuseum,
+  night_club: BsMusicNoteBeamed,
+  tourist_attraction: AiOutlineCamera,
 }
 
 function PlaceForm({
@@ -100,20 +119,29 @@ function PlaceForm({
             />
           </Autocomplete>
         </label>
-        <fieldset className="flex flex-wrap justify-center gap-3 rounded-md border p-2">
+        <fieldset className="flex flex-wrap justify-center gap-2">
           <legend>Choose what types of places you'd like to see:</legend>
           {Object.entries(queryParamToDisplayType).map((entry) => {
             const [queryParam, displayName] = entry
+            const Icon = placeTypeToIcon[queryParam] || GrStatusUnknown
+            const isSelected = selectedTypes.has(queryParam)
             return (
-              <label key={queryParam} className="flex cursor-pointer gap-x-1">
+              <label
+                key={queryParam}
+                className={twMerge(
+                  'flex w-24 cursor-pointer flex-col items-center gap-x-1 rounded-lg border-2 p-2',
+                  isSelected ? 'bg-slate-200' : '',
+                )}
+              >
                 <input
-                  className="cursor-pointer"
+                  className="hidden cursor-pointer"
                   type="checkbox"
                   name={displayName}
                   value={queryParam}
                   onChange={handleCheckboxToggle}
                 />
-                {displayName}
+                <p className="h-12 text-center">{displayName}</p>
+                <Icon className="h-10 w-10" />
               </label>
             )
           })}

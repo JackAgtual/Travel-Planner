@@ -5,6 +5,8 @@ import ImageCarousel from './ImageCarousel'
 import FavoriteIcon from './FavoriteIcon'
 import Reviews from './Reviews'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
+import Skeleton from './Skeleton'
+import ReviewSkeleton from './ReviewSkeleton'
 
 type PlaceModalProps = {
   place: PlaceData
@@ -26,7 +28,7 @@ function PlaceModal(
   }: PlaceModalProps,
   ref: ForwardedRef<HTMLDialogElement>,
 ) {
-  const [placeDetails, , , fetchDetails] = usePlaceDetails(place.id)
+  const [placeDetails, isLoading, , fetchDetails] = usePlaceDetails(place.id)
 
   const handleCardClose = () => {
     setModalOpen(false)
@@ -75,6 +77,41 @@ function PlaceModal(
       cardElement.removeEventListener('click', handleModalClick)
     }
   }, [modalOpen])
+
+  if (isLoading) {
+    return (
+      <dialog className="w-full max-w-5xl cursor-auto space-y-4">
+        <div className="flex items-center justify-between gap-x-4">
+          <Skeleton className="h-8 w-72" />
+          <div className="flex items-center gap-x-4">
+            <Skeleton className="h-10 w-10" />
+            <Skeleton className="h-10 w-10" />
+          </div>
+        </div>
+        <Skeleton className="aspect-video h-auto rounded-lg" />
+        <div className="space-y-3">
+          <Skeleton className="w-1/2" />
+          <Skeleton className="w-1/2" />
+          <Skeleton className="w-1/2" />
+          <Skeleton className="w-1/2" />
+        </div>
+        <div className="space-y-4">
+          <Skeleton className="h-8 w-48" />
+          <Skeleton className="w-72" />
+          <Skeleton className="w-72" />
+          <Skeleton className="w-72" />
+          <Skeleton className="w-72" />
+          <Skeleton className="w-72" />
+        </div>
+        <Skeleton className="h-8 w-48" />
+        <div className="space-y-6">
+          {Array.from({ length: 5 }).map((_) => (
+            <ReviewSkeleton />
+          ))}
+        </div>
+      </dialog>
+    )
+  }
 
   return (
     <dialog autoFocus={false} ref={ref} className="max-w-5xl cursor-auto space-y-4">

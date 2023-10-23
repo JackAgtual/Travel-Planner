@@ -1,15 +1,13 @@
-import Map from '../components/Map'
+import DestinationDisplaySkeleton from './DestinationDisplaySkeleton'
+import Map from '../Map'
 import {
   Coordinates,
   PlaceResponse,
   queryParamToDisplayType,
   SelectedPlaces,
-} from '../types/place'
-import PlacesGrid from '../components/PlacesGrid'
-import Weather from '../components/Weather'
-import LoadingCard from './LoadingCard'
-import CardGrid from './CardGrid'
-import Skeleton from './Skeleton'
+} from '../../types/place'
+import PlacesGrid from '../PlacesGrid'
+import Weather from '../Weather'
 
 type DestinationDisplayProps = {
   loadingDestination: boolean
@@ -35,17 +33,7 @@ function DestinationDisplay({
   }
 
   if (loadingDestination) {
-    return (
-      <div className="space-y-4">
-        <Skeleton className="h-[500px] rounded-lg" />
-        <Skeleton className="mx-auto h-9 w-80" />
-        <CardGrid>
-          {Array.from({ length: 10 }).map((_) => {
-            return <LoadingCard />
-          })}
-        </CardGrid>
-      </div>
-    )
+    return <DestinationDisplaySkeleton />
   }
 
   return (

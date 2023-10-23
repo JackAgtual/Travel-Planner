@@ -7,7 +7,7 @@ import {
 } from '../types/place'
 import PlacesGrid from '../components/PlacesGrid'
 import Weather from '../components/Weather'
-import { AiOutlineLoading } from 'react-icons/ai'
+import LoadingCard from './LoadingCard'
 
 type DestinationDisplayProps = {
   loadingDestination: boolean
@@ -34,9 +34,15 @@ function DestinationDisplay({
 
   if (loadingDestination) {
     return (
-      <div className="flex items-center justify-center space-x-3">
-        <AiOutlineLoading className="animate-spin" />
-        <p className="text-center text-xl">Loading Data ...</p>
+      <div className="space-y-4">
+        <div className="h-[500px] animate-pulse bg-slate-200"></div>
+        <div className="animate-pulse bg-slate-200"></div>
+        <div className="animiate-pulse mx-auto h-9 w-80 rounded-full bg-slate-200"></div>
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+          {Array.from({ length: 10 }).map((_) => {
+            return <LoadingCard />
+          })}
+        </div>
       </div>
     )
   }

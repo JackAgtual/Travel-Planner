@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import WeatherCard from './WeatherCard'
-import { Coordinates } from '../types/place'
-import useWeather from '../hooks/useWeather'
+import { Coordinates } from '../../types/place'
+import useWeather from '../../hooks/useWeather'
 
 type WeatherProps = {
   coordinates: Coordinates

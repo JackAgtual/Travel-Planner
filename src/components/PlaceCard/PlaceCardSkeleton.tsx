@@ -1,6 +1,6 @@
-import Skeleton from './Skeleton'
+import Skeleton from '../Skeleton'
 
-function LoadingCard() {
+function PlaceCardSkeleton() {
   return (
     <div className="flex justify-center">
       <div className="max-w-sm grow  space-y-3 rounded-lg border-2 pb-4">
@@ -12,4 +12,4 @@ function LoadingCard() {
   )
 }
 
-export default LoadingCard
+export default PlaceCardSkeleton

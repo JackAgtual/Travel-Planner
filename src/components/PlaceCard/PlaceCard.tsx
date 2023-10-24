@@ -1,8 +1,8 @@
 import { useState, useRef } from 'react'
-import { PlaceData, SelectedPlaces } from '../types/place'
-import Rating from './Rating'
-import PlaceModal from './PlaceModal'
-import FavoriteIcon from './FavoriteIcon'
+import { PlaceData, SelectedPlaces } from '../../types/place'
+import Rating from '../Rating'
+import PlaceModal from '../PlaceModal'
+import FavoriteIcon from '../FavoriteIcon'
 
 type PlaceCardProps = {
   place: PlaceData

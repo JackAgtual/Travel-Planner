@@ -1,4 +1,4 @@
-import { WeatherData } from '../types/weather'
+import { WeatherData } from '../../types/weather'
 
 type WeatherCardProps = {
   weather: WeatherData

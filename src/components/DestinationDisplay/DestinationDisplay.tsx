@@ -1,13 +1,13 @@
-import Map from '../components/Map'
+import DestinationDisplaySkeleton from './DestinationDisplaySkeleton'
+import Map from '../Map'
 import {
   Coordinates,
   PlaceResponse,
   queryParamToDisplayType,
   SelectedPlaces,
-} from '../types/place'
-import PlacesGrid from '../components/PlacesGrid'
-import Weather from '../components/Weather'
-import { AiOutlineLoading } from 'react-icons/ai'
+} from '../../types/place'
+import PlacesGrid from '../PlacesGrid'
+import Weather from '../Weather'
 
 type DestinationDisplayProps = {
   loadingDestination: boolean
@@ -33,12 +33,7 @@ function DestinationDisplay({
   }
 
   if (loadingDestination) {
-    return (
-      <div className="flex items-center justify-center space-x-3">
-        <AiOutlineLoading className="animate-spin" />
-        <p className="text-center text-xl">Loading Data ...</p>
-      </div>
-    )
+    return <DestinationDisplaySkeleton />
   }
 
   return (

@@ -1,3 +1,4 @@
+import CardGrid from './CardGrid'
 import PlaceCard from './PlaceCard'
 import { PlaceData, SelectedPlaces } from '../types/place'
 
@@ -16,13 +17,13 @@ function PlacesGrid({ placeType, places, setSelectedPlaces }: PlaceGridProps) {
           We couldn't find any {placeType.toLowerCase()}
         </p>
       ) : (
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+        <CardGrid>
           {places.map((place, idx) => {
             return (
               <PlaceCard key={idx} place={place} setSelectedPlaces={setSelectedPlaces} />
             )
           })}
-        </div>
+        </CardGrid>
       )}
     </div>
   )

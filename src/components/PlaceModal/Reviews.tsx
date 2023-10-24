@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io'
-import { PlaceDetails } from '../types/place'
-import Rating from './Rating'
+import { PlaceDetails } from '../../types/place'
+import Rating from '../Rating'
 
 type ReviewsProps = Pick<PlaceDetails, 'reviews'>
 

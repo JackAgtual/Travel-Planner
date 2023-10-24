@@ -1,6 +1,6 @@
 import { GoogleMap } from '@react-google-maps/api'
 import Marker from './Marker'
-import { Coordinates, SelectedPlaces } from '../types/place'
+import { Coordinates, SelectedPlaces } from '../../types/place'
 import { useMemo } from 'react'
 
 type MapProps = {

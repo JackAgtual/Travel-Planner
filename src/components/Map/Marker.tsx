@@ -1,5 +1,5 @@
 import { MarkerF, InfoWindowF } from '@react-google-maps/api'
-import { PlaceData } from '../types/place'
+import { PlaceData } from '../../types/place'
 import { useState } from 'react'
 
 type MarkerProps = {

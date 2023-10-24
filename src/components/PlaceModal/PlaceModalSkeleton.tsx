@@ -1,5 +1,5 @@
 import Skeleton from '../Skeleton'
-import { ReviewSkeleton } from '../Reviews/'
+import ReviewSkeleton from './ReviewSkeleton'
 
 function PlaceModalSkeleton() {
   return (

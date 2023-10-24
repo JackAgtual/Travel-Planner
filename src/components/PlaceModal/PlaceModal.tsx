@@ -1,9 +1,9 @@
 import { useEffect, forwardRef, ForwardedRef } from 'react'
 import usePlaceDetails from '../../hooks/usePlaceDetails'
 import { PlaceData, SelectedPlaces } from '../../types/place'
-import ImageCarousel from '../ImageCarousel'
+import ImageCarousel from './ImageCarousel'
 import FavoriteIcon from '../FavoriteIcon'
-import Reviews from '../Reviews'
+import Reviews from './Reviews'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import PlaceModalSkeleton from './PlaceModalSkeleton'
 

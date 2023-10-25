@@ -1,6 +1,6 @@
 import { toast, ToastOptions } from 'react-toastify'
 
-export const timeBeforeNotification = 2000
+export const timeBeforeNotification = 4000
 
 const toastConfig: ToastOptions = {
   position: 'top-right',
@@ -14,5 +14,5 @@ const toastConfig: ToastOptions = {
 }
 
 export function notifyLoading() {
-  toast.info('Still loading. This only happens the first search.', toastConfig)
+  toast.info('Still loading. This should only happen the first search.', toastConfig)
 }

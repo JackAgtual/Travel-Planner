@@ -29,5 +29,4 @@ npm run dev
 - Store user session in a database or local storage
 - Allow user to click on card to show more detail about the place
 - Button to load more data of a specific type of attarction (eg. load more restaurants)
-- Specific messages/warnings if loading data takes more than x seconds (backed takes too long to spin up)
 - Specific messages/warnings if backend rate limit is reached

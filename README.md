@@ -35,4 +35,3 @@ npm run dev
 - Store user session in a database or local storage
 - Button to load more data of a specific type of attarction (eg. load more restaurants)
 - Specific messages/warnings if backend rate limit is reached
-- Skeleton loading components

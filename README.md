@@ -14,9 +14,9 @@ Click on a place to view more pictures, address and phone number, hours, and rev
 
 ## Technical Details
 
-The frontend of this application was developed using TypeScript, React, and Tailwind CSS. The web application is responsive and mobile friendly.
+The frontend was crafted using React, TypeScript, and Tailwind CSS, employing a mobile-first design approach for full responsiveness. React was used to create an interactive user experience; attractions could be liked, and a click would open a modal with comprehensive information. A react google maps library was used to display user selected destinations on an interactive map.
 
-Custom hooks were used to fetch data from a google maps api and weather api. A react google maps library was used to display user selected destinations on an interactive map.
+The Express.js backend aggregated data from multiple external APIs to ensure up-to-date attraction details. Custom hooks were used to fetch data from a google maps api and weather api.
 
 Check out the backend code here: https://github.com/JackAgtual/Travel-Planner-Backend
 
